@@ -1,18 +1,24 @@
 package com.lzola.web;
 
+import java.util.List;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.SimpleFormComponentLabel;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.util.CollectionUtils;
 
 import com.lzola.dao.RezerwaMiesiecznaDao;
 import com.lzola.domain.RezerwaMiesieczna;
@@ -24,7 +30,11 @@ public class HomePage extends WebPage {
 	@SpringBean
 	private RezerwaMiesiecznaDao rezerwaMiesiecznaDao;
 	
-	private String numerSzkody;
+	private String numerSzkody;	
+	private List<RezerwaMiesieczna> rezerwyMiesieczne;
+	
+	
+	private final ListView<RezerwaMiesieczna> listaWyszukanychRezerw;
 	
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
@@ -56,16 +66,30 @@ public class HomePage extends WebPage {
             protected void onSubmit(AjaxRequestTarget target, Form<?> form)
             {
                 // repaint the feedback panel so that it is hidden
-				RezerwaMiesieczna rezerwaMiesiecznaDlaSzkody = rezerwaMiesiecznaDao.findByNumerSzkody(numerSzkody);
+				rezerwyMiesieczne = rezerwaMiesiecznaDao.findByNumerSzkody(numerSzkody);
                 target.add(feedback);
-            }
-
-            @Override
-            protected void onError(AjaxRequestTarget target, Form<?> form)
-            {
-                // repaint the feedback panel so errors are shown
-                target.add(feedback);
+                if (!CollectionUtils.isEmpty(rezerwyMiesieczne)) {
+                	target.add(listaWyszukanychRezerw.setVisible(true));
+                }
             }
         });
+        
+        
+        listaWyszukanychRezerw = new ListView<RezerwaMiesieczna>("rezerwy", new PropertyModel<List<RezerwaMiesieczna>>(this, "rezerwyMiesieczne")) {
+        		
+			@Override
+			protected void populateItem(ListItem<RezerwaMiesieczna> rezerwy) {
+				RezerwaMiesieczna rez = rezerwy.getModelObject();
+				
+				rezerwy.add(new Label("typRezerwy", rez.getTypRezerwy()));
+				rezerwy.add(new Label("rodzajRezerwy", rez.getRodzajRezerwy()));
+				rezerwy.add(new Label("miesiac", rez.getMiesiac()));
+				rezerwy.add(new Label("wartosc", rez.getWartosc()));
+				
+			}
+        	
+		};
+		
+		add(listaWyszukanychRezerw.setOutputMarkupId(true).setVisible(false));
     }
 }

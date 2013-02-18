@@ -1,5 +1,6 @@
 package com.lzola.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ public class RezerwaMiesieczna {
 
 	@Id
 	@Column
+	private Long id;
+	@Column
 	private String numerSzkody;
 	@Column
 	private String typRezerwy;
@@ -21,7 +24,15 @@ public class RezerwaMiesieczna {
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date miesiac;
+	@Column
+	private BigDecimal wartosc;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNumerSzkody() {
 		return numerSzkody;
 	}
@@ -46,4 +57,11 @@ public class RezerwaMiesieczna {
 	public void setMiesiac(Date miesiac) {
 		this.miesiac = miesiac;
 	}
+	public BigDecimal getWartosc() {
+		return wartosc;
+	}
+	public void setWartosc(BigDecimal wartosc) {
+		this.wartosc = wartosc;
+	}
+	
 }

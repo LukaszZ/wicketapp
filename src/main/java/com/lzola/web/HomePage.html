@@ -7,9 +7,9 @@
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
 	</head>
 	<body>
-		<wicket:extend>
 	        <br/>
-	        Start typing in the textfields and see the form being validated as you type. Ajax requests are throttled down to once per second, so they will not overload the server.
+	        Start typing in the textfields and see the form being validated as you type. <br/> 
+	        Ajax requests are throttled down to once per second, so they will not overload the server.
 	        <br/>
 	        <div wicket:id="feedback">[[ feedback ]]</div>
 	
@@ -18,6 +18,16 @@
 	            <br/>
 	            <input type="submit" value="submit via ajax" wicket:id="ajax-button"/>
 	        </form>
-	    </wicket:extend>
+	        
+	        <br/>
+	        <table wicket:id="rezerwy">
+	        	<tr>
+	        		<td><span wicket:id="typRezerwy" /></td>
+	        		<td><span wicket:id="rodzajRezerwy" /></td>
+	        		<td><span wicket:id="miesiac" /></td>
+	        		<td><span wicket:id="wartosc" /></td>
+	        	</tr>
+	        </table>
 	</body>
 </html>
+
