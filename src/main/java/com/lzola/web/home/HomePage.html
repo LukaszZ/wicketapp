@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Wicket Quickstart</title>	
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+		<link rel="stylesheet" href="TableCSSCode.css" type="text/css" />
+	</head>
+	<body>	        
+	        <div wicket:id="feedback">[[ feedback ]]</div>
+		
+		        <form wicket:id="form">
+					<div class="CSSTableGenerator">
+		        	<table>
+		        		<tr>
+		        			<td colspan="2"><wicket:message key="form.name">[Wyszukiwanie rezerw]</wicket:message></td>
+		        		</tr>
+		        		<tr>
+		        			<td><label wicket:id="name-label">[name label]</label></td>
+		        			<td><input type="text" wicket:id="numerSzkody"/></td>
+		        		</tr>
+		        		<tr>
+		        			<td>&nbsp;</td>
+		        			<td><input type="submit" value="submit via ajax" wicket:id="ajax-button"/></td>		        			
+		        		</tr>
+		        	</table>		            
+					</div>
+		        </form>
+	        
+	        <br/>
+	        <div class="CSSTableGenerator">
+		        <table wicket:id="rezerwy">
+		        	<tr>
+		        		<td><wicket:message key="listaRezerw.typ">[Typ rezerwy]</wicket:message></td>
+		        		<td><wicket:message key="listaRezerw.rodzaj">[Rodzaj rezerwy]</wicket:message></td>
+		        		<td><wicket:message key="listaRezerw.miesiac">[Miesiac]</wicket:message></td>
+		        		<td><wicket:message key="listaRezerw.wartosc">[Wartosc]</wicket:message></td>
+		        	</tr>
+		        	<tr>
+		        		<td><span wicket:id="typRezerwy" /></td>
+		        		<td><span wicket:id="rodzajRezerwy" /></td>
+		        		<td><span wicket:id="miesiac" /></td>
+		        		<td><span wicket:id="wartosc" /></td>
+		        	</tr>
+		        </table>
+	        </div>
+	</body>
+</html>
+

@@ -4,8 +4,8 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.lzola.web.HomePage;
 import com.lzola.web.WicketApplication;
+import com.lzola.web.home.HomePage;
 
 /**
  * Simple test using the WicketTester
@@ -15,14 +15,12 @@ public class TestHomePage
 	private WicketTester tester;
 
 	@BeforeMethod	
-	public void setUp()
-	{
+	public void setUp()	{
 		tester = new WicketTester(new WicketApplication());
 	}
 
 	@Test
-	public void homepageRendersSuccessfully()
-	{
+	public void homepageRendersSuccessfully()	{
 		//start and render the test page
 		tester.startPage(HomePage.class);
 

@@ -9,22 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+//@Entity
 public class RezerwaMiesieczna {
 
-	@Id
-	@Column
+//	@Id
+//	@Column
 	private Long id;
-	@Column
+//	@Column
 	private String numerSzkody;
-	@Column
+//	@Column
 	private String typRezerwy;
-	@Column
+//	@Column
 	private String rodzajRezerwy;
-	@Column
-	@Temporal(TemporalType.DATE)
+//	@Column
+//	@Temporal(TemporalType.DATE)
 	private Date miesiac;
-	@Column
+//	@Column
 	private BigDecimal wartosc;
 	
 	public Long getId() {
