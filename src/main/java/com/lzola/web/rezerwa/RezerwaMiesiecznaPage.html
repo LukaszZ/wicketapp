@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<wicket:extend>
+			<fieldset>
+				<legend><wicket:message key="rezerwa.miesieczna.form.name">[Wyszukiwanie rezerw]</wicket:message></legend>
+				<form wicket:id="form">
+					<p>		<label for="numerSzkody"><wicket:message key="rezerwa.form.numerSzkody" /></label>
+							<input type="text" wicket:id="numerSzkody" /><br></p>
+							
+					<p>		<input type="submit" class="formbutton" value="Wyszukaj" wicket:id="ajax-button" style="float: right;" /></p>
+				</form>
+			</fieldset>
+			
+			<p>  </p>
+	        
+	        <table wicket:id="wmc">
+	        	<tr>
+	        		<th><wicket:message key="listaRezerw.typ">[Typ rezerwy]</wicket:message></th>
+	        		<th><wicket:message key="listaRezerw.rodzaj">[Rodzaj rezerwy]</wicket:message></th>
+	        		<th><wicket:message key="listaRezerw.miesiac">[Miesiac]</wicket:message></th>
+	        		<th><wicket:message key="listaRezerw.wartosc">[Wartosc]</wicket:message></th>
+	        	</tr>
+	        	<tr wicket:id="rezerwy">
+	        		<td><span wicket:id="typRezerwy" /></td>
+	        		<td><span wicket:id="rodzajRezerwy" /></td>
+	        		<td><span wicket:id="miesiac" /></td>
+	        		<td><span wicket:id="wartosc" /></td>
+	        	</tr>
+	        </table>
+	    </wicket:extend>
+	</body>
+</html>
+

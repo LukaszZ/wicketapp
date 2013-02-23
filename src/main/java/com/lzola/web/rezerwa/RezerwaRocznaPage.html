@@ -2,91 +2,37 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
 	<meta charset="utf-8" />
-	<title>Wicket Quickstart</title>
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen"	title="Stylesheet" />
-	<link rel="stylesheet" href="TableCSSCode.css" type="text/css" />
-	<link rel="stylesheet" href="menu.css" type="text/css" />
-	<script src="jquery-1.9.1.min.js"/>
 </head>
 <body>
-	<script>
-	$(document).ready(function(){
-	
-		$("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
+	<wicket:extend>
+		<fieldset>
+			<legend><wicket:message key="rezerwa.form.name">[Wyszukiwanie rezerw]</wicket:message></legend>
+			<form wicket:id="form">
+				<p>		<label for="numerSzkody"><wicket:message key="rezerwa.form.numerSzkody" /></label>
+						<input type="text" wicket:id="numerSzkody" /><br></p>
+						
+				<p>		<input type="submit" class="formbutton" value="Wyszukaj" wicket:id="ajax-button" style="float: right;" /></p>
+			</form>
+		</fieldset>
 		
-		$("ul.topnav li span").click(function() { //When trigger is clicked...
-			
-			//Following events are applied to the subnav itself (moving subnav up and down)
-			$(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
-	
-			$(this).parent().hover(function() {
-			}, function(){	
-				$(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
-			});
-	
-			//Following events are applied to the trigger (Hover events for the trigger)
-			}).hover(function() { 
-				$(this).addClass("subhover"); //On hover over, add class "subhover"
-			}, function(){	//On Hover Out
-				$(this).removeClass("subhover"); //On hover out, remove class "subhover"
-		});
-	
-	});
-	</script>
-
-	<ul class="topnav">
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Tutorials</a>
-			<ul class="subnav">
-				<li><a href="#">Sub Nav Link</a></li>
-				<li><a href="#">Sub Nav Link</a></li>
-			</ul></li>
-		<li><a href="#">Resources</a>
-			<ul class="subnav">
-				<li><a href="#">Sub Nav Link</a></li>
-				<li><a href="#">Sub Nav Link</a></li>
-			</ul></li>
-		<li><a href="#">About Us</a></li>
-		<li><a href="#">Advertise</a></li>
-		<li><a href="#">Submit</a></li>
-		<li><a href="#">Contact Us</a></li>
-	</ul>
-
-	<div wicket:id="feedback">[[ feedback ]]</div>
-
-	<form wicket:id="form">
-		<div class="CSSTableGenerator" style="width: 600px; height: 150px;">
-			<table>
+		<p>  </p>
+		
+		<!-- <h3>Table</h3> -->		
+		<table wicket:id="wmc">
+			<tbody>
 				<tr>
-					<td colspan="2"><wicket:message key="form.name">[Wyszukiwanie rezerw]</wicket:message></td>
+					<th><wicket:message key="rezerwa.listaRezerw.rok">[rok]</wicket:message></th>
+					<th><wicket:message key="rezerwa.listaRezerw.pierwszaNaOdszk">[pierwszaNaOdszk]</wicket:message></th>
+					<th><wicket:message key="rezerwa.listaRezerw.pierwszaKL">[pierwszaKL]</wicket:message></th>
 				</tr>
-				<tr>
-					<td><wicket:message key="form.numerSzkody" /></td>
-					<td><input type="text" wicket:id="numerSzkody" /></td>
+				<tr wicket:id="rezerwy">
+					<td><span wicket:id="rok" /></td>
+					<td><span wicket:id="pierwszaNaOdszk" /></td>
+					<td><span wicket:id="pierwszaKL" /></td>
 				</tr>
-				<tr>
-					<td colspan="2" style="height: 20px;"><input type="submit"
-						value="Wyszukaj" wicket:id="ajax-button" style="float: right;" /></td>
-				</tr>
-			</table>
-		</div>
-	</form>
-
-	<br />
-	<div class="CSSTableGenerator" style="width: 600px;" wicket:id="wmc">
-		<table>
-			<tr>
-				<td><wicket:message key="listaRezerw.rok">[rok]</wicket:message></td>
-				<td><wicket:message key="listaRezerw.pierwszaNaOdszk">[pierwszaNaOdszk]</wicket:message></td>
-				<td><wicket:message key="listaRezerw.pierwszaKL">[pierwszaKL]</wicket:message></td>
-			</tr>
-			<tr wicket:id="rezerwy">
-				<td><span wicket:id="rok" /></td>
-				<td><span wicket:id="pierwszaNaOdszk" /></td>
-				<td><span wicket:id="pierwszaKL" /></td>
-			</tr>
+			</tbody>
 		</table>
-	</div>
+	</wicket:extend>
 </body>
 </html>
 

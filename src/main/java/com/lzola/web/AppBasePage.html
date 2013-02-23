@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Jedz Lostroznie</title>
+	<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	<!--
+		widget, a free CSS web template by spyka Webmaster (www.spyka.net)
+		
+		Download: http://www.spyka.net/web-templates/widget/
+		
+		License: Creative Commons Attribution
+	//-->
+</head>
+
+<body class="noheader">
+	<div id="container">
+		<div id="header">
+			<h1>
+				<a href="/"><wicket:message key="base.header">[Header]</wicket:message></a>
+			</h1>
+			<h2>&nbsp;</h2>
+			<div class="clear"></div>
+		</div>
+		<div id="nav">
+			<ul class="sf-menu dropdown">
+				<li wicket:id="home"><wicket:link><a href="home.HomePage.html">Home</a></wicket:link></li>
+				<li wicket:id="rezerwa"><a class="has_submenu" href="#">Rezerwa</a>
+					<ul>
+						<li><wicket:link><a href="rezerwa.RezerwaMiesiecznaPage.html">Miesieczna</a></wicket:link></li>
+						<li><wicket:link><a href="rezerwa.RezerwaRocznaPage.html">Roczna</a></wicket:link></li>
+					</ul></li>
+				<li wicket:id="examples"><wicket:link><a href="examples.ExamplesPage.html">Examples</a></wicket:link></li>
+				<li wicket:id="contact"><wicket:link><a href="contact.ContactPage.html">Contact</a></wicket:link></li>
+			</ul>
+		</div>
+
+		<div id="body">
+			<div id="content">
+				<div class="box">
+					<div wicket:id="feedback">[[ feedback ]]</div>
+					<wicket:child />
+				</div>
+			</div>
+
+			<div class="sidebar">
+				<ul>
+					<li>
+						<h4>
+							<wicket:message key="base.onas.title">[O nas]</wicket:message>
+						</h4>
+						<ul>
+							<li>
+								<p style="margin: 0;">
+									<wicket:message key="base.onas">[O nas]</wicket:message>
+								</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footer-links">
+
+			<!-- A link to http://www.spyka.net must remain. To remove link see http://www.spyka.net/licensing -->
+			<wicket:message key="base.copyright">[copyright]</wicket:message>
+		</div>
+	</div>
+</body>
+</html>

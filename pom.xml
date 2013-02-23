@@ -138,7 +138,7 @@
 	</dependencies>
 	<build>
 		<!--<finalName>${artifactId}</finalName>-->
-		<finalName>rezerwy</finalName>
+		<finalName>wicketapp</finalName>
 		
 		<resources>
 			<resource>
