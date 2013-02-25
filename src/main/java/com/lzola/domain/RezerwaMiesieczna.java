@@ -8,6 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import com.lzola.utils.BigDecimalUtils;
 
 @Entity
 public class RezerwaMiesieczna implements Serializable{
@@ -70,5 +73,8 @@ public class RezerwaMiesieczna implements Serializable{
 	public void setStanSzkody(String stanSzkody) {
 		this.stanSzkody = stanSzkody;
 	}
-	
+	@Transient
+	public String getWartoscAsString() {
+		return BigDecimalUtils.formatToCurrency(wartosc);
+	}
 }

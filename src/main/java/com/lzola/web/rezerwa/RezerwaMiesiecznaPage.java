@@ -11,7 +11,6 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -88,7 +87,7 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
 				rezerwy.add(new Label("rodzajRezerwy", rez.getRodzajRezerwy()));
 				rezerwy.add(new Label("rok", rez.getRok()));
 				rezerwy.add(new Label("miesiac", new StringResourceModel("miesiac."+rez.getMiesiac(), this, null)));
-				rezerwy.add(new Label("wartosc", rez.getWartosc()));
+				rezerwy.add(new Label("wartosc", rez.getWartoscAsString()));
 				
 			}
         	
