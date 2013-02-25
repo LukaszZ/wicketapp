@@ -59,11 +59,11 @@ public class RezerwaRocznaPage extends AppBasePage {
             {
 				
 				listaRezerwRocznych.clear();
-				
 				List<RezerwaRoczna> findByNumerSzkody = rezerwaRocznaDao.findByNumerSzkody(rocznaKey.getNumerSzkody());
 				if(!CollectionUtils.isEmpty(findByNumerSzkody)) {
 					listaRezerwRocznych.addAll(findByNumerSzkody);
-				}			
+				}
+				wmc.setVisible(true);
 				
                 renderujPonownieComponent(target, feedback);
                	renderujPonownieComponent(target, wmc);
@@ -72,7 +72,8 @@ public class RezerwaRocznaPage extends AppBasePage {
 
 			@Override
 			protected void onError(AjaxRequestTarget target, Form<?> form) {
-				listaRezerwRocznych.clear();				
+				listaRezerwRocznych.clear();
+				wmc.setVisible(false);
 				renderujPonownieComponent(target, feedback);
                	renderujPonownieComponent(target, wmc);
 			}
@@ -82,6 +83,8 @@ public class RezerwaRocznaPage extends AppBasePage {
 		
 		wmc = new WebMarkupContainer("wmc");
 		wmc.setOutputMarkupId(true);
+		wmc.setOutputMarkupPlaceholderTag(true);
+		wmc.setVisible(false);
 		ListView<RezerwaRoczna> lista = new ListView<RezerwaRoczna>("rezerwy", new PropertyModel<List<RezerwaRoczna>>(this, "listaRezerwRocznych")) {
 
 			@Override

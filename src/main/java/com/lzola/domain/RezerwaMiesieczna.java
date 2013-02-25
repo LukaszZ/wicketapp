@@ -1,49 +1,56 @@
 package com.lzola.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 @Entity
-public class RezerwaMiesieczna {
+public class RezerwaMiesieczna implements Serializable{
 
-	@Id
+	/**
+	 * generated serialVersionId
+	 */
+	private static final long serialVersionUID = -6947863986106570967L;
+	
+	@EmbeddedId
+	private RezerwaMiesiecznaKey key;
 	@Column
-	private Long id;
-	@Column
-	private String numerSzkody;
-	@Column
-	private String typRezerwy;
-	@Column
-	private String rodzajRezerwy;
-	@Column
-	@Temporal(TemporalType.DATE)
-	private Date miesiac;
+	private String rodzajRezerwy;	
 	@Column
 	private BigDecimal wartosc;
+	@Column
+	private String stanSzkody;
+	@OneToMany(mappedBy="rezerwaMiesieczna")
+	private List<RezerwaMiesiecznaNaRyzyku> rezerwyNaRyzyku;
 	
-	public Long getId() {
-		return id;
+	public List<RezerwaMiesiecznaNaRyzyku> getRezerwyNaRyzyku() {
+		return rezerwyNaRyzyku;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setRezerwyNaRyzyku(List<RezerwaMiesiecznaNaRyzyku> rezerwyNaRyzyku) {
+		this.rezerwyNaRyzyku = rezerwyNaRyzyku;
 	}
 	public String getNumerSzkody() {
-		return numerSzkody;
+		return key.getNumerSzkody();
 	}
-	public void setNumerSzkody(String numerSzkody) {
-		this.numerSzkody = numerSzkody;
+	public Integer getRok() {
+		return key.getRok();
+	}
+	public Integer getMiesiac() {
+		return key.getMiesiac();
 	}
 	public String getTypRezerwy() {
-		return typRezerwy;
+		return key.getTypRezerwy();
 	}
-	public void setTypRezerwy(String typRezerwy) {
-		this.typRezerwy = typRezerwy;
+	public RezerwaMiesiecznaKey getKey() {
+		return key;
+	}
+	public void setKey(RezerwaMiesiecznaKey key) {
+		this.key = key;
 	}
 	public String getRodzajRezerwy() {
 		return rodzajRezerwy;
@@ -51,17 +58,17 @@ public class RezerwaMiesieczna {
 	public void setRodzajRezerwy(String rodzajRezerwy) {
 		this.rodzajRezerwy = rodzajRezerwy;
 	}
-	public Date getMiesiac() {
-		return miesiac;
-	}
-	public void setMiesiac(Date miesiac) {
-		this.miesiac = miesiac;
-	}
 	public BigDecimal getWartosc() {
 		return wartosc;
 	}
 	public void setWartosc(BigDecimal wartosc) {
 		this.wartosc = wartosc;
+	}
+	public String getStanSzkody() {
+		return stanSzkody;
+	}
+	public void setStanSzkody(String stanSzkody) {
+		this.stanSzkody = stanSzkody;
 	}
 	
 }

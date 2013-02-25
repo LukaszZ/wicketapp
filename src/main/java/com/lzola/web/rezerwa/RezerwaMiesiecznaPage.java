@@ -11,11 +11,12 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
-import org.springframework.util.CollectionUtils;
 
 import com.lzola.dao.RezerwaMiesiecznaDao;
 import com.lzola.domain.RezerwaMiesieczna;
@@ -57,16 +58,25 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
             {
                 // repaint the feedback panel so that it is hidden
 				rezerwyMiesieczne = rezerwaMiesiecznaDao.findByNumerSzkody(numerSzkody);
+				wmc.setVisible(true);
                 target.add(feedback);
-                if (!CollectionUtils.isEmpty(rezerwyMiesieczne)) {
-                	listaWyszukanychRezerw.setVisible(true);
-                	target.add(wmc);
-                }
+            	target.add(wmc);
             }
+
+			@Override
+			protected void onError(AjaxRequestTarget target, Form<?> form) {
+				wmc.setVisible(false);
+				target.add(feedback);
+				target.add(wmc);
+			}
+			
+			
         });
         
         wmc = new WebMarkupContainer("wmc");
 		wmc.setOutputMarkupId(true);
+		wmc.setOutputMarkupPlaceholderTag(true);
+		wmc.setVisible(false);
 		
         listaWyszukanychRezerw = new ListView<RezerwaMiesieczna>("rezerwy", new PropertyModel<List<RezerwaMiesieczna>>(this, "rezerwyMiesieczne")) {
         		
@@ -76,14 +86,15 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
 				
 				rezerwy.add(new Label("typRezerwy", rez.getTypRezerwy()));
 				rezerwy.add(new Label("rodzajRezerwy", rez.getRodzajRezerwy()));
-				rezerwy.add(new Label("miesiac", rez.getMiesiac()));
+				rezerwy.add(new Label("rok", rez.getRok()));
+				rezerwy.add(new Label("miesiac", new StringResourceModel("miesiac."+rez.getMiesiac(), this, null)));
 				rezerwy.add(new Label("wartosc", rez.getWartosc()));
 				
 			}
         	
 		};
 		
-		wmc.add(listaWyszukanychRezerw.setOutputMarkupId(true).setVisible(false));
+		wmc.add(listaWyszukanychRezerw.setOutputMarkupId(true));
 		add(wmc);
     }
 }
