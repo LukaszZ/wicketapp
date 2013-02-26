@@ -78,4 +78,10 @@ public class RezerwaMiesieczna implements Serializable{
 	public String getWartoscAsString() {
 		return BigDecimalUtils.formatToCurrency(wartosc);
 	}
+	@Transient
+	public String getId() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(key.getRok()).append(key.getMiesiac()).append(key.getTypRezerwy());
+		return sb.toString();
+	}
 }

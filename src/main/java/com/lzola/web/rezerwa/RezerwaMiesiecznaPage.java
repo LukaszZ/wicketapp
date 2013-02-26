@@ -85,7 +85,7 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
 			protected void populateItem(ListItem<RezerwaMiesieczna> rezerwy) {
 				RezerwaMiesieczna rez = rezerwy.getModelObject();
 
-				String rezerwyContainerId = "ryzyko"+(rez.getRok()+10000*rez.getMiesiac());
+				String rezerwyContainerId = rez.getId();
 				rezerwy.add(new AttributeModifier("onclick", "showHideRezerwyNaRyzyku('"+rezerwyContainerId+"');"));
 				
 				StringResourceModel miesiac = new StringResourceModel("miesiac."+rez.getMiesiac(), this, null);
