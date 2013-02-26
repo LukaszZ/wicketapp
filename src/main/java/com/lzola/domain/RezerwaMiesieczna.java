@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -28,7 +29,7 @@ public class RezerwaMiesieczna implements Serializable{
 	private BigDecimal wartosc;
 	@Column
 	private String stanSzkody;
-	@OneToMany(mappedBy="rezerwaMiesieczna")
+	@OneToMany(mappedBy="rezerwaMiesieczna", fetch=FetchType.EAGER)
 	private List<RezerwaMiesiecznaNaRyzyku> rezerwyNaRyzyku;
 	
 	public List<RezerwaMiesiecznaNaRyzyku> getRezerwyNaRyzyku() {

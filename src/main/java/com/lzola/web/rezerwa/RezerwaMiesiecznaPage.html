@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 	<head>
-		<meta charset="utf-8" />
 	</head>
 	<body>
-		<wicket:extend>
+		<wicket:extend>			
+			<script type="text/javascript">
+				function showHideRezerwyNaRyzyku(rezerwyContainerId) {
+					var ele = document.getElementById(rezerwyContainerId);
+					if(ele.style.display == "none") {
+				    	ele.style.display = "list-item";
+				  	} else {
+						ele.style.display = "none";
+					}
+				}
+			</script>
 			<fieldset>
 				<legend><wicket:message key="rezerwa.miesieczna.form.name">[Wyszukiwanie rezerw]</wicket:message></legend>
 				<form wicket:id="form">
@@ -16,21 +25,32 @@
 			</fieldset>
 			
 			<p>  </p>
-	        
-	        <table wicket:id="wmc">
-	        	<tr>
-	        		<th><wicket:message key="listaRezerw.miesiac">[Miesiac]</wicket:message></th>
-	        		<th><wicket:message key="listaRezerw.typ">[Typ rezerwy]</wicket:message></th>
-	        		<th><wicket:message key="listaRezerw.rodzaj">[Rodzaj rezerwy]</wicket:message></th>
-	        		<th><wicket:message key="listaRezerw.wartosc">[Wartosc]</wicket:message></th>
-	        	</tr>
-	        	<tr wicket:id="rezerwy">
-	        		<td><span wicket:id="rok" />&nbsp;<span wicket:id="miesiac" /></td>
-	        		<td><span wicket:id="typRezerwy" /></td>
-	        		<td><span wicket:id="rodzajRezerwy" /></td>
-	        		<td><span wicket:id="wartosc" /></td>
-	        	</tr>
-	        </table>
+	        	       
+	        <span wicket:id="wmc">
+	        	 <table>
+		        	<tr>
+		        		<th><wicket:message key="listaRezerw.miesiac">[Miesiac]</wicket:message></th>
+		        		<th><wicket:message key="listaRezerw.typ">[Typ rezerwy]</wicket:message></th>
+		        		<th><wicket:message key="listaRezerw.rodzaj">[Rodzaj rezerwy]</wicket:message></th>
+		        		<th><wicket:message key="listaRezerw.wartosc">[Wartosc]</wicket:message></th>
+		        	</tr>
+		        </table>
+		        <span wicket:id="rezerwy">
+		        	<h5>
+		        		<span wicket:id="miesiac" style="width: 120px; float: left; margin-left: 5px;"/>
+		        		<span wicket:id="typRezerwy" style="width: 170px; float: left;"/>
+		        		<span wicket:id="rodzajRezerwy" style="width: 210px; float: left;"/>
+		        		<span wicket:id="wartosc" style="float: left;"/>
+		        	</h5>
+		        	<ul wicket:id="rezerwyNaRyzykuContainer" style="display: none; float: left;">
+		        		<li wicket:id="rezerwyNaRyzyku" style="float: left;">
+		        			<span wicket:id="ryzyko.nazwa" style="width: 260px; float:left"/>
+		        			<span wicket:id="ryzyko.rodzaj" style="width: 210px; float:left"/>
+		        			<span wicket:id="ryzyko.wartosc"  style="float: left;"/></li>
+		        	</ul>
+		        </span>
+		     </span>
+	        	        	
 	    </wicket:extend>
 	</body>
 </html>

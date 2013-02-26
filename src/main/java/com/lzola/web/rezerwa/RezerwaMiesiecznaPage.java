@@ -2,6 +2,7 @@ package com.lzola.web.rezerwa;
 
 import java.util.List;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -19,6 +20,7 @@ import org.apache.wicket.validation.validator.StringValidator;
 
 import com.lzola.dao.RezerwaMiesiecznaDao;
 import com.lzola.domain.RezerwaMiesieczna;
+import com.lzola.domain.RezerwaMiesiecznaNaRyzyku;
 import com.lzola.web.AppBasePage;
 
 public class RezerwaMiesiecznaPage extends AppBasePage {
@@ -82,12 +84,21 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
 			@Override
 			protected void populateItem(ListItem<RezerwaMiesieczna> rezerwy) {
 				RezerwaMiesieczna rez = rezerwy.getModelObject();
+
+				String rezerwyContainerId = "ryzyko"+(rez.getRok()+10000*rez.getMiesiac());
+				rezerwy.add(new AttributeModifier("onclick", "showHideRezerwyNaRyzyku('"+rezerwyContainerId+"');"));
 				
+				StringResourceModel miesiac = new StringResourceModel("miesiac."+rez.getMiesiac(), this, null);
+				
+				rezerwy.add(new Label("miesiac", rez.getRok()+" "+miesiac.getObject()));
 				rezerwy.add(new Label("typRezerwy", rez.getTypRezerwy()));
 				rezerwy.add(new Label("rodzajRezerwy", rez.getRodzajRezerwy()));
-				rezerwy.add(new Label("rok", rez.getRok()));
-				rezerwy.add(new Label("miesiac", new StringResourceModel("miesiac."+rez.getMiesiac(), this, null)));
 				rezerwy.add(new Label("wartosc", rez.getWartoscAsString()));
+				
+				WebMarkupContainer webMarkupContainer = new WebMarkupContainer("rezerwyNaRyzykuContainer");
+				webMarkupContainer.setMarkupId(rezerwyContainerId);
+				webMarkupContainer.add(new ListViewRezerwyNaRyzyku(rez.getRezerwyNaRyzyku()));
+				rezerwy.add(webMarkupContainer);
 				
 			}
         	
@@ -96,4 +107,22 @@ public class RezerwaMiesiecznaPage extends AppBasePage {
 		wmc.add(listaWyszukanychRezerw.setOutputMarkupId(true));
 		add(wmc);
     }
+	
+	private class ListViewRezerwyNaRyzyku extends ListView<RezerwaMiesiecznaNaRyzyku> {
+		
+		public ListViewRezerwyNaRyzyku(List<RezerwaMiesiecznaNaRyzyku> rezerwy) {
+			super("rezerwyNaRyzyku", rezerwy);
+		}
+
+		@Override
+		protected void populateItem(ListItem<RezerwaMiesiecznaNaRyzyku> rezerwy) {
+			RezerwaMiesiecznaNaRyzyku rezerwa = rezerwy.getModelObject();
+			
+			rezerwy.add(new Label("ryzyko.nazwa", rezerwa.getNazwaRyzyka()));
+			rezerwy.add(new Label("ryzyko.rodzaj", rezerwa.getRodzajRezerwy()));
+			rezerwy.add(new Label("ryzyko.wartosc", rezerwa.getWartoscAsString()));
+		}
+		
+		
+	}
 }
